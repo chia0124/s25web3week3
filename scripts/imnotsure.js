@@ -53,15 +53,38 @@ function addToEnd(){
 
 
 //add an event listener to the element that will remove the last list item in the list
-document.querySelector("#removeLast").addEventListener("click", removeLast);
+document.querySelector("#removeLast").addEventListener("click", removeItem);
+//add an event listener to the element that will remove the first list item in the list
+document.querySelector("#removeFirst").addEventListener("click", removeItem);
 
-function removeLast(){
+function removeItem(){
     //get the adder element (the UL that holds the list items)
     const adder = document.querySelector("#adder");
-    //also get all the children in a variable as well, to use later...
+
+    //check to see which button was actually clicked...
+    //two equals makes a comparison (asks a question)
+    //declare the variable cRemove, which will be changed inside the if statement
+    let cRemove;
+    
+    //get the list of children to count them
     const listItems = adder.children;
 
-    //check the length first to make sure there is a list item to remove
+    //check to make sure there actually are list items to remove...
+    if(listItems.length > 0){
+        if(this.id == "removeLast"){
+
+            //set the child to remove variable to be the last child
+            cRemove = listItems.length - 1;
+        }else{
+            cRemove = 0;
+        }
+        //remove the child element based on which button was clicked
+        adder.removeChild(listItems[cRemove]);
+    }
+
+    
+
+    /*//check the length first to make sure there is a list item to remove
     if(listItems.length > 0){
         //use the length of the list of children to remove the last child
         //have to do length-1 because arrays always start at 0
@@ -69,5 +92,5 @@ function removeLast(){
 
         //tell the UL to remove the last child specifically
         adder.removeChild(listItems[lastC]);
-    }
+    }*/
 }
